@@ -6,11 +6,9 @@ import (
 	"github.com/hashicorp/terraform/helper/schema"
 )
 
-func resourceDnsCnameRecord() *schema.Resource {
+func dataDnsCnameRecord() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceDnsCnameRecordCreate,
-		Read:   resourceDnsCnameRecordRead,
-		Delete: resourceDnsCnameRecordDelete,
+		Read: resourceDnsCnameRecordRead,
 
 		Schema: map[string]*schema.Schema{
 			"name": &schema.Schema{
@@ -27,21 +25,12 @@ func resourceDnsCnameRecord() *schema.Resource {
 	}
 }
 
-func resourceDnsCnameRecordCreate(d *schema.ResourceData, meta interface{}) error {
-	d.SetId(d.Get("name").(string))
-	return resourceDnsCnameRecordRead(d, meta)
-}
-
 func resourceDnsCnameRecordRead(d *schema.ResourceData, meta interface{}) error {
-	cname, err := net.LookupCNAME(d.Id())
+	cname, err := net.LookupCNAME(d.Get("name").(string))
 	if err != nil {
 		return err
 	}
 
 	d.Set("cname", cname)
-	return nil
-}
-
-func resourceDnsCnameRecordDelete(d *schema.ResourceData, meta interface{}) error {
 	return nil
 }

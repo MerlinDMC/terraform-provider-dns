@@ -3,7 +3,7 @@ package main
 import (
 	"github.com/hashicorp/terraform/plugin"
 
-	"github.com/Shopify/terraform-provider-dns/dns"
+	"github.com/MerlinDMC/terraform-provider-dns/dns"
 )
 
 func main() {

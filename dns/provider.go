@@ -9,10 +9,11 @@ func Provider() terraform.ResourceProvider {
 	return &schema.Provider{
 		Schema: map[string]*schema.Schema{},
 
-		ResourcesMap: map[string]*schema.Resource{
-			"dns_a_record":     resourceDnsARecord(),
-			"dns_cname_record": resourceDnsCnameRecord(),
-			"dns_txt_record":   resourceDnsTxtRecord(),
+		DataSourcesMap: map[string]*schema.Resource{
+			"dns_a_record":     dataDnsARecord(),
+			"dns_cname_record": dataDnsCnameRecord(),
+			"dns_srv_record":   dataDnsSrvRecord(),
+			"dns_txt_record":   dataDnsTxtRecord(),
 		},
 	}
 }
